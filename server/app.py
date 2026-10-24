@@ -109,5 +109,45 @@ def delete_workout(id):
 
     return jsonify({"message": "Workout deleted successfully"}), 200
 
+
+@app.route(
+    "/workouts/<int:workout_id>/exercises/<int:exercise_id>/workout_exercises",
+    methods=["POST"]
+)
+def add_exercise_to_workout(workout_id, exercise_id):
+    workout = db.session.get(Workout, workout_id)
+    exercise = db.session.get(Exercise, exercise_id)
+
+    if workout is None:
+        return jsonify({"error": "Workout not found"}), 404
+
+    if exercise is None:
+        return jsonify({"error": "Exercise not found"}), 404
+
+    try:
+        data = workout_exercise_schema.load({
+            "workout_id": workout_id,
+            "exercise_id": exercise_id,
+            **request.get_json()
+        })
+
+        workout_exercise = WorkoutExercise(
+            workout_id=workout_id,
+            exercise_id=exercise_id,
+            reps=data["reps"],
+            sets=data["sets"],
+            duration_seconds=data["duration_seconds"]
+        )
+
+        db.session.add(workout_exercise)
+        db.session.commit()
+
+        return jsonify(workout_exercise_schema.dump(workout_exercise)), 201
+
+    except ValidationError as error:
+        db.session.rollback()
+        return jsonify({"error": error.messages}), 400
+
+
 if __name__ == "__main__":
     app.run(port=5555, debug=True)
