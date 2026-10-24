@@ -18,7 +18,11 @@ class Exercise(db.Model):
             raise ValueError("Exercise name cannot be empty")
         return value
 
-    workout_exercises = db.relationship("WorkoutExercise", backref="exercise")
+    workout_exercises = db.relationship(
+        "WorkoutExercise", 
+        backref="exercise",
+        cascade="all, delete-orphan"
+    )
 
 class Workout(db.Model):
     __tablename__ = "workouts"
@@ -34,7 +38,11 @@ class Workout(db.Model):
             raise ValueError("Workout duration must be greater than zero")
         return value
 
-    workout_exercises = db.relationship("WorkoutExercise", backref="workout")
+    workout_exercises = db.relationship(
+        "WorkoutExercise", 
+        backref="workout",
+        cascade="all, delete-orphan"
+    )
 
 class WorkoutExercise(db.Model):
     __tablename__ = "workout_exercises"
