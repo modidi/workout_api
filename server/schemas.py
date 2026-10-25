@@ -13,7 +13,7 @@ class ExerciseSchema(Schema):
 
     @validates("name")
     def validate_name(self, value):
-        if not value.strip():
+        if not value or not value.strip():
             raise ValidationError("Exercise name cannot be empty")
             
 class WorkoutSchema(Schema):
