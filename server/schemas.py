@@ -50,4 +50,4 @@ class WorkoutExerciseSchema(Schema):
     @validates("duration_seconds")
     def validate_duration(self, value):
         if value < 0:
-            raise ValidationError("Duration cannot be negative")
+            raise ValidationError("Duration must be greater than zero")

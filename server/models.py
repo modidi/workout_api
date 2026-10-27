@@ -51,6 +51,7 @@ class WorkoutExercise(db.Model):
         UniqueConstraint("workout_id", "exercise_id"),
         CheckConstraint("reps > 0"),
         CheckConstraint("sets > 0"),
+        CheckConstraint("duration_seconds > 0"),
     )
 
     id = db.Column(db.Integer, primary_key=True)

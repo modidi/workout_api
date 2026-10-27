@@ -53,7 +53,7 @@ with app.app_context():
             exercise_id=exercise1.id,
             reps=10,
             sets=3,
-            duration_seconds=0
+            duration_seconds=60
         )
         db.session.add(workout_exercise1)
 
