@@ -1,6 +1,7 @@
 from marshmallow import Schema,fields, validates, ValidationError
 
 class ExerciseSchema(Schema):
+    id = fields.Integer(dump_only=True)
     name = fields.String(required=True)
     category = fields.String(required=True)
     equipment_needed = fields.Boolean(required=True)
@@ -17,6 +18,7 @@ class ExerciseSchema(Schema):
             raise ValidationError("Exercise name cannot be empty")
             
 class WorkoutSchema(Schema):
+    id = fields.Integer(dump_only=True)
     date = fields.Date(required=True)
     duration_minutes = fields.Integer(required=True)
     notes = fields.String(required=False, allow_none=True)

@@ -120,3 +120,17 @@ Send a `POST` request to `/workouts/1/exercises/1/workout_exercises` with:
 ```
 
 Replace the IDs in the URL with the IDs of the workout and exercise you want to connect.
+
+
+## Running Tests
+
+To run the API tests, activate the Pipenv environment and run:
+
+```bash
+cd server
+PYTHONPATH=. python -m pytest ../tests/test_api.py -v
+```
+
+The tests check that:
+- `GET /workouts` returns status code `200`.
+- Requesting a workout that does not exist returns status code `404`.
