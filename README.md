@@ -39,20 +39,20 @@ pipenv shell
 Run the database migrations:
 
 ```bash
-pipenv run flask --app server/app.py db upgrade
+flask --app server/app.py db upgrade
 ```
 
 ### 5. Seed the database
 
 ```bash
-pipenv run python server/seed.py
+python server/seed.py
 ```
 
 ### 6. Run the application
 
 ```bash
 cd server
-pipenv run python app.py
+python app.py
 ```
 
 The API will be available at:
